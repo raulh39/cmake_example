@@ -45,4 +45,6 @@ cmake \
 -G Ninja
 
 cmake --build build_gcc_ninja
+
+ctest --test-dir build_gcc_ninja
 ```
