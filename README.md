@@ -29,3 +29,21 @@ And using:
 I also want to include the instructions here on how to use all of this
 
 # Instructions
+
+These instructions assume we are in the parent directory of the repository and
+that the name of the directory for the repository is "cmake_examples".
+
+## Ninja + System's gcc
+
+```
+cmake \
+-DCMAKE_BUILD_TYPE:STRING=Debug \
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
+-DCMAKE_C_COMPILER:FILEPATH=/usr/bin/gcc \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-S cmake_examples \
+-B build_gcc_ninja \
+-G Ninja
+
+cmake --build build_gcc_ninja
+```
