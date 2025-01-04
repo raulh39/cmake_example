@@ -30,3 +30,5 @@ target_link_libraries(hello_world PUBLIC awesome::awesome)
 add_executable(awesome_unit_tests awesome_unit_tests.cpp)
 target_link_libraries(awesome_unit_tests PUBLIC awesome::awesome)
 add_test(NAME AwesomeUnitTests COMMAND awesome_unit_tests)
+
+install(TARGETS hello_world awesome)

@@ -47,4 +47,22 @@ cmake \
 cmake --build build_gcc_ninja
 
 ctest --test-dir build_gcc_ninja
+
+cmake --install build_gcc_ninja --prefix ./installation_gcc_ninja
+```
+
+### Ninja multiconfig + System's gcc
+```
+cmake \
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-S cmake_examples \
+-B build_gcc_ninja_multi \
+-G "Ninja Multi-Config"
+
+cmake --build build_gcc_ninja_multi --config Debug
+
+ctest --test-dir build_gcc_ninja_multi -C Debug
+
+cmake --install build_gcc_ninja_multi --config Debug --prefix ./installation_gcc_ninja_multi
 ```
