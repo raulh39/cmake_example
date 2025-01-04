@@ -48,7 +48,8 @@ cmake --build build_gcc_ninja
 
 ctest --test-dir build_gcc_ninja
 
-cmake --install build_gcc_ninja --prefix ./installation_gcc_ninja
+rm -rf installation_gcc_ninja &&
+cmake --install build_gcc_ninja --prefix installation_gcc_ninja
 ```
 
 ### Ninja multiconfig + System's gcc
@@ -64,5 +65,6 @@ cmake --build build_gcc_ninja_multi --config Debug
 
 ctest --test-dir build_gcc_ninja_multi -C Debug
 
-cmake --install build_gcc_ninja_multi --config Debug --prefix ./installation_gcc_ninja_multi
+rm -rf installation_gcc_ninja_multi &&
+cmake --install build_gcc_ninja_multi --config Debug --prefix installation_gcc_ninja_multi
 ```
