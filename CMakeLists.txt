@@ -16,6 +16,16 @@ enable_testing()
 # Avoid specifying the STATIC or SHARED keyword for a library until it is known to be needed.
 add_library(awesome)
 target_sources(awesome PRIVATE awesome.cpp)
+target_sources(awesome
+    PUBLIC
+        FILE_SET api
+        TYPE HEADERS
+        BASE_DIRS .
+        FILES
+            awesome.h
+            awesome_version.h
+)
+
 add_library(awesome::awesome ALIAS awesome)
 
 # Recommended practice:
@@ -32,3 +42,4 @@ target_link_libraries(awesome_unit_tests PUBLIC awesome::awesome)
 add_test(NAME AwesomeUnitTests COMMAND awesome_unit_tests)
 
 install(TARGETS hello_world awesome)
+install(TARGETS awesome FILE_SET api)
