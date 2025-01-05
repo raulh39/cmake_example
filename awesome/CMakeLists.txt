@@ -10,6 +10,8 @@ target_sources(awesome PRIVATE awesome.cpp)
 
 # Recommended practice:
 # Use file sets to declare header files so that latter can be installed
+# Avoid target_include_directories() to add any header search paths, since all
+#   such paths should be handled by the BASE_DIRS
 target_sources(awesome
     PUBLIC
         FILE_SET api
