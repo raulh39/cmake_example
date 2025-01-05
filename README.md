@@ -86,3 +86,24 @@ ctest --test-dir build_gcc_ninja_multi -C Release
 rm -rf installation_gcc_ninja_multi &&
 cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc_ninja_multi
 ```
+
+
+# TODO
+
+* Presets. Add CMAKE_COMPILE_WARNING_AS_ERROR to one of them
+* CPack, and add it to preset workflow
+* Recommended practices:
+    * Do NOT use CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.
+    * Prefer to provide cache variables for controlling whether to enable optional parts of
+     the build instead of encoding the logic in build scripts outside of CMake.
+    * Avoid relying on environment variables being defined, apart from perhaps the ubiquitous
+     PATH or similar operating system level variables. Therefore, prefer to pass information
+     directly to CMake through cache variables instead wherever possible.
+    * Try to establish a variable naming convention early. For cache variables, consider
+     grouping related variables under a common prefix followed by an underscore.
+    * Avoid defining non-cache variables in the project which have the same name as cache variables
+    * Aim to minimize the amount of output at the STATUS log level, saving more detailed output for
+     a log level of VERBOSE or lower. 
+* 14.3. Print Helpers
+* 14.4. Tracing Variable Access
+* 14.5. Debugging Generator Expressions
