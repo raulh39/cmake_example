@@ -90,10 +90,9 @@ cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc
 
 # TODO
 
-* Presets. Add CMAKE_COMPILE_WARNING_AS_ERROR to one of them
 * CPack, and add it to preset workflow
 * Recommended practices:
-    * Do NOT use CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.
+    * Do NOT if/switch on CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.
     * Prefer to provide cache variables for controlling whether to enable optional parts of
      the build instead of encoding the logic in build scripts outside of CMake.
     * Avoid relying on environment variables being defined, apart from perhaps the ubiquitous

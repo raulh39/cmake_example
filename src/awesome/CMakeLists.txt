@@ -23,6 +23,17 @@ target_sources(awesome
 )
 
 # Recommended practice:
+# Use GenerateExportHeader to generate macro for symbols visibility
+include(GenerateExportHeader)
+generate_export_header(awesome)
+target_sources(awesome
+    PUBLIC
+        FILE_SET api
+        BASE_DIRS ${CMAKE_CURRENT_BINARY_DIR}
+        FILES ${CMAKE_CURRENT_BINARY_DIR}/awesome_export.h
+)
+
+# Recommended practice:
 # Use aliases for libraries
 add_library(awesome::awesome ALIAS awesome)
 

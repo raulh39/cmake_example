@@ -1,3 +1,10 @@
+# Recommended starting folders:
+#   src: main code and unit tests for the project
+#   cmake: helper cmake scripts
+#   tests: end to end tests and similar
+#   packaging: if packages needs to be created
+#   doc: documentation of the project
+
 # Recommended practice:
 # Ensure every CMake project has a cmake_minimum_required() command as the first line of its top level CMakeLists.txt file
 cmake_minimum_required(VERSION 3.30)
@@ -14,18 +21,13 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # Recommended way to set C++ standard to use (see "cmake/set_cpp_version.cmake")
 include(set_cpp_version)
+# Recommended practices: hide all symbols in shared libs by default (see "cmake/visibility.cmake")
+include(visibility)
 
 # General recommended practice:
 # Avoid hard-coding turning warnings into errors. Instead, the user can use
 #     -DCMAKE_COMPILE_WARNING_AS_ERROR=YES (probably in a preset)
 
-
-# Recommended starting folders:
-#   src: main code and unit tests for the project
-#   cmake: helper cmake scripts
-#   tests: end to end tests and similar
-#   packaging: if packages needs to be created
-#   doc: documentation of the project
 
 add_subdirectory(src)
 

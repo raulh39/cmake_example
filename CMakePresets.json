@@ -18,6 +18,10 @@
         "CMAKE_COMPILE_WARNING_AS_ERROR": {
           "type": "BOOL",
           "value": true
+        },
+        "BUILD_SHARED_LIBS": {
+          "type": "BOOL",
+          "value": true
         }
       }
     },
