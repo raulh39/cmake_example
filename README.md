@@ -35,9 +35,18 @@ that the name of the directory for the repository is "cmake_examples".
 
 ## Ninja + System's gcc
 
+### Using presets
+```
+env -C cmake_examples cmake --workflow --preset aw-ninja-gcc --fresh
+
+rm -rf installation_gcc_ninja &&
+cmake --install build_gcc_ninja --prefix installation_gcc_ninja
+```
+
+### Not using presets
 ```
 cmake \
--DCMAKE_BUILD_TYPE:STRING=Debug \
+-DCMAKE_BUILD_TYPE:STRING=Release \
 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
 -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
 -S cmake_examples \
@@ -53,6 +62,15 @@ cmake --install build_gcc_ninja --prefix installation_gcc_ninja
 ```
 
 ### Ninja multiconfig + System's gcc
+### Using presets
+```
+env -C cmake_examples cmake --workflow --preset aw-ninjamulti-gcc --fresh
+
+rm -rf installation_gcc_ninja_multi &&
+cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc_ninja_multi
+```
+
+### Not using presets
 ```
 cmake \
 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
@@ -61,10 +79,10 @@ cmake \
 -B build_gcc_ninja_multi \
 -G "Ninja Multi-Config"
 
-cmake --build build_gcc_ninja_multi --config Debug
+cmake --build build_gcc_ninja_multi --config Release
 
-ctest --test-dir build_gcc_ninja_multi -C Debug
+ctest --test-dir build_gcc_ninja_multi -C Release
 
 rm -rf installation_gcc_ninja_multi &&
-cmake --install build_gcc_ninja_multi --config Debug --prefix installation_gcc_ninja_multi
+cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc_ninja_multi
 ```

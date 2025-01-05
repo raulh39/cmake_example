@@ -28,6 +28,11 @@ install(TARGETS awesome FILE_SET api)
 
 # TODO:
 # Presets. Add CMAKE_COMPILE_WARNING_AS_ERROR to one of them
+# CPack, and add it to preset workflow
+#   {
+#     "type": "package",
+#     "name": "ninja_gcc"
+#   }
 # Recommended practices:
 #   Do NOT use CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.
 #   Prefer to provide cache variables for controlling whether to enable optional parts of

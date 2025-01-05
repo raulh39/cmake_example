@@ -1,0 +1,119 @@
+{
+  "version": 9,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 30,
+    "patch": 0
+  },
+  "include": [],
+  "configurePresets": [
+    {
+      "name": "aw-base",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": {
+          "type": "BOOL",
+          "value": true
+        },
+        "CMAKE_COMPILE_WARNING_AS_ERROR": {
+          "type": "BOOL",
+          "value": true
+        }
+      }
+    },
+    {
+      "name": "aw-ninja-gcc",
+      "displayName": "Ninja + System's gcc",
+      "description": "Ninja + System's gcc",
+      "inherits": [
+        "aw-base"
+      ],
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build_gcc_ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": {
+          "type": "STRING",
+          "value": "Release"
+        }
+      }
+    },
+    {
+      "name": "aw-ninjamulti-gcc",
+      "displayName": "Ninja Multi-config + System's gcc",
+      "description": "Ninja Multi-config + System's gcc",
+      "inherits": [
+        "aw-base"
+      ],
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/../build_gcc_ninja_multi"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "aw-ninja-gcc",
+      "configurePreset": "aw-ninja-gcc"
+    },
+    {
+      "name": "aw-ninjamulti-gcc",
+      "configurePreset": "aw-ninjamulti-gcc",
+      "configuration": "Release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "aw-ninja-gcc",
+      "configurePreset": "aw-ninja-gcc",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
+    },
+    {
+      "name": "aw-ninjamulti-gcc",
+      "inherits": [
+        "aw-ninja-gcc"
+      ],
+      "configurePreset": "aw-ninjamulti-gcc",
+      "configuration": "Release"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "aw-ninja-gcc",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "aw-ninja-gcc"
+        },
+        {
+          "type": "build",
+          "name": "aw-ninja-gcc"
+        },
+        {
+          "type": "test",
+          "name": "aw-ninja-gcc"
+        }
+      ]
+    },
+    {
+      "name": "aw-ninjamulti-gcc",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "aw-ninjamulti-gcc"
+        },
+        {
+          "type": "build",
+          "name": "aw-ninjamulti-gcc"
+        },
+        {
+          "type": "test",
+          "name": "aw-ninjamulti-gcc"
+        }
+      ]
+    }
+  ]
+}
