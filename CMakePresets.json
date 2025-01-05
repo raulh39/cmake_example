@@ -1,10 +1,6 @@
 {
   "version": 9,
-  "cmakeMinimumRequired": {
-    "major": 3,
-    "minor": 30,
-    "patch": 0
-  },
+  "cmakeMinimumRequired": { "major": 3, "minor": 30, "patch": 0 },
   "include": [],
   "configurePresets": [
     {
@@ -26,11 +22,26 @@
       }
     },
     {
+      "name": "aw-gcc-base",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "aw-clang-base",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
       "name": "aw-ninja-gcc",
       "displayName": "Ninja + System's gcc",
       "description": "Ninja + System's gcc",
       "inherits": [
-        "aw-base"
+        "aw-base",
+        "aw-gcc-base"
       ],
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/../build_gcc_ninja",
@@ -46,77 +57,76 @@
       "displayName": "Ninja Multi-config + System's gcc",
       "description": "Ninja Multi-config + System's gcc",
       "inherits": [
-        "aw-base"
+        "aw-base",
+        "aw-gcc-base"
       ],
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/../build_gcc_ninja_multi"
+    },
+    {
+      "name": "aw-ninja-clang",
+      "displayName": "Ninja + CLang",
+      "description": "Ninja + CLang",
+      "inherits": [
+        "aw-clang-base",
+        "aw-ninja-gcc"
+      ],
+      "binaryDir": "${sourceDir}/../build_clang_ninja"
+    },
+    {
+      "name": "aw-ninjamulti-clang",
+      "displayName": "Ninja Multi-config + CLang",
+      "description": "Ninja Multi-config + CLang",
+      "inherits": [
+        "aw-clang-base",
+        "aw-ninjamulti-gcc"
+      ],
+      "binaryDir": "${sourceDir}/../build_clang_ninja_multi"
     }
   ],
   "buildPresets": [
-    {
-      "name": "aw-ninja-gcc",
-      "configurePreset": "aw-ninja-gcc"
-    },
-    {
-      "name": "aw-ninjamulti-gcc",
-      "configurePreset": "aw-ninjamulti-gcc",
-      "configuration": "Release"
-    }
+    { "name": "aw-ninja-gcc",        "configurePreset": "aw-ninja-gcc" },
+    { "name": "aw-ninja-clang",      "configurePreset": "aw-ninja-clang" },
+    { "name": "aw-ninjamulti-gcc",   "configurePreset": "aw-ninjamulti-gcc",   "configuration": "Release" },
+    { "name": "aw-ninjamulti-clang", "configurePreset": "aw-ninjamulti-clang", "configuration": "Release" }
   ],
   "testPresets": [
-    {
-      "name": "aw-ninja-gcc",
-      "configurePreset": "aw-ninja-gcc",
-      "output": {
-        "outputOnFailure": true
-      },
-      "execution": {
-        "noTestsAction": "error",
-        "stopOnFailure": true
-      }
-    },
-    {
-      "name": "aw-ninjamulti-gcc",
-      "inherits": [
-        "aw-ninja-gcc"
-      ],
-      "configurePreset": "aw-ninjamulti-gcc",
-      "configuration": "Release"
-    }
+    { "name": "aw-ninja-gcc", "configurePreset": "aw-ninja-gcc" },
+    { "name": "aw-ninjamulti-gcc", "configurePreset": "aw-ninjamulti-gcc", "configuration": "Release" },
+    { "name": "aw-ninja-clang", "configurePreset": "aw-ninja-clang" },
+    { "name": "aw-ninjamulti-clang", "configurePreset": "aw-ninjamulti-clang", "configuration": "Release" }
   ],
   "workflowPresets": [
     {
       "name": "aw-ninja-gcc",
       "steps": [
-        {
-          "type": "configure",
-          "name": "aw-ninja-gcc"
-        },
-        {
-          "type": "build",
-          "name": "aw-ninja-gcc"
-        },
-        {
-          "type": "test",
-          "name": "aw-ninja-gcc"
-        }
+        { "type": "configure", "name": "aw-ninja-gcc" },
+        { "type": "build",     "name": "aw-ninja-gcc" },
+        { "type": "test",      "name": "aw-ninja-gcc" }
       ]
     },
     {
       "name": "aw-ninjamulti-gcc",
       "steps": [
-        {
-          "type": "configure",
-          "name": "aw-ninjamulti-gcc"
-        },
-        {
-          "type": "build",
-          "name": "aw-ninjamulti-gcc"
-        },
-        {
-          "type": "test",
-          "name": "aw-ninjamulti-gcc"
-        }
+        { "type": "configure", "name": "aw-ninjamulti-gcc" },
+        { "type": "build",     "name": "aw-ninjamulti-gcc" },
+        { "type": "test",      "name": "aw-ninjamulti-gcc" }
+      ]
+    },
+    {
+      "name": "aw-ninja-clang",
+      "steps": [
+        { "type": "configure", "name": "aw-ninja-clang" },
+        { "type": "build",     "name": "aw-ninja-clang" },
+        { "type": "test",      "name": "aw-ninja-clang" }
+      ]
+    },
+    {
+      "name": "aw-ninjamulti-clang",
+      "steps": [
+        { "type": "configure", "name": "aw-ninjamulti-clang" },
+        { "type": "build",     "name": "aw-ninjamulti-clang" },
+        { "type": "test",      "name": "aw-ninjamulti-clang" }
       ]
     }
   ]

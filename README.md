@@ -89,8 +89,8 @@ cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc
 
 
 # TODO
-
 * CPack, and add it to preset workflow
+* option() to disable subtrees 
 * Recommended practices:
     * Do NOT if/switch on CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.
     * Prefer to provide cache variables for controlling whether to enable optional parts of
