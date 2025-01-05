@@ -10,6 +10,14 @@ project(cmake_examples VERSION 1.0 LANGUAGES CXX)
 
 enable_testing()
 
+# Recommended way to set C++ standard to use (see "set_cpp_version.cmake")
+include(cmake/set_cpp_version.cmake)
+
+# General recommended practice:
+# Avoid hard-coding turning warnings into errors. Instead, the user can use
+#     -DCMAKE_COMPILE_WARNING_AS_ERROR=YES (probably in a preset)
+
+
 add_subdirectory(awesome)
 
 add_subdirectory(hello_world)
@@ -19,7 +27,9 @@ install(TARGETS awesome FILE_SET api)
 
 
 # TODO:
+# Presets. Add CMAKE_COMPILE_WARNING_AS_ERROR to one of them
 # Recommended practices:
+#   Do NOT use CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.
 #   Prefer to provide cache variables for controlling whether to enable optional parts of
 #     the build instead of encoding the logic in build scripts outside of CMake.
 #   Avoid relying on environment variables being defined, apart from perhaps the ubiquitous
