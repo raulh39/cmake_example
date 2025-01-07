@@ -33,14 +33,11 @@ I also want to include the instructions here on how to use all of this
 These instructions assume we are in the parent directory of the repository and
 that the name of the directory for the repository is "cmake_examples".
 
-## Ninja + System's gcc
+## Ninja + gcc
 
 ### Using presets
 ```
 env -C cmake_examples cmake --workflow --preset aw-ninja-gcc --fresh
-
-rm -rf installation_gcc_ninja &&
-cmake --install build_gcc_ninja --prefix installation_gcc_ninja
 ```
 
 ### Not using presets
@@ -57,17 +54,19 @@ cmake --build build_gcc_ninja
 
 ctest --test-dir build_gcc_ninja
 
+env -C build_gcc_ninja cpack -G TGZ
+```
+
+### Install
+```
 rm -rf installation_gcc_ninja &&
 cmake --install build_gcc_ninja --prefix installation_gcc_ninja
 ```
 
-### Ninja multiconfig + System's gcc
+### Ninja multiconfig + gcc
 ### Using presets
 ```
 env -C cmake_examples cmake --workflow --preset aw-ninjamulti-gcc --fresh
-
-rm -rf installation_gcc_ninja_multi &&
-cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc_ninja_multi
 ```
 
 ### Not using presets
@@ -83,13 +82,77 @@ cmake --build build_gcc_ninja_multi --config Release
 
 ctest --test-dir build_gcc_ninja_multi -C Release
 
+env -C build_gcc_ninja_multi cpack -G TGZ -C Release
+```
+
+### Install
+```
 rm -rf installation_gcc_ninja_multi &&
 cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc_ninja_multi
+```
+
+## Ninja + clang
+
+### Using presets
+```
+env -C cmake_examples cmake --workflow --preset aw-ninja-clang --fresh
+```
+
+### Not using presets
+```
+cmake \
+-DCMAKE_BUILD_TYPE:STRING=Release \
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-S cmake_examples \
+-B build_clang_ninja \
+-G Ninja
+
+cmake --build build_clang_ninja
+
+ctest --test-dir build_clang_ninja
+
+env -C build_clang_ninja cpack -G TGZ
+```
+
+### Install
+```
+rm -rf installation_clang_ninja &&
+cmake --install build_clang_ninja --prefix installation_clang_ninja
+```
+
+### Ninja multiconfig + clang
+### Using presets
+```
+env -C cmake_examples cmake --workflow --preset aw-ninjamulti-clang --fresh
+```
+
+### Not using presets
+```
+cmake \
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-S cmake_examples \
+-B build_clang_ninja_multi \
+-G "Ninja Multi-Config"
+
+cmake --build build_clang_ninja_multi --config Release
+
+ctest --test-dir build_clang_ninja_multi -C Release
+
+env -C build_clang_ninja_multi cpack -G TGZ -C Release
+```
+
+### Install
+```
+rm -rf installation_clang_ninja_multi &&
+cmake --install build_clang_ninja_multi --config Release --prefix installation_clang_ninja_multi
 ```
 
 
 # TODO
 * CPack, and add it to preset workflow
+* Read Chapter 35, Installing, to move "install()" commands away from packaging/CMakeLists.txt
 * option() to disable subtrees 
 * Recommended practices:
     * Do NOT if/switch on CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.

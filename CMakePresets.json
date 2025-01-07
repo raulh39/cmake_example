@@ -91,10 +91,16 @@
     { "name": "aw-ninjamulti-clang", "configurePreset": "aw-ninjamulti-clang", "configuration": "Release" }
   ],
   "testPresets": [
-    { "name": "aw-ninja-gcc", "configurePreset": "aw-ninja-gcc" },
-    { "name": "aw-ninjamulti-gcc", "configurePreset": "aw-ninjamulti-gcc", "configuration": "Release" },
-    { "name": "aw-ninja-clang", "configurePreset": "aw-ninja-clang" },
+    { "name": "aw-ninja-gcc",        "configurePreset": "aw-ninja-gcc" },
+    { "name": "aw-ninjamulti-gcc",   "configurePreset": "aw-ninjamulti-gcc",   "configuration": "Release" },
+    { "name": "aw-ninja-clang",      "configurePreset": "aw-ninja-clang" },
     { "name": "aw-ninjamulti-clang", "configurePreset": "aw-ninjamulti-clang", "configuration": "Release" }
+  ],
+  "packagePresets": [
+    { "name": "aw-ninja-gcc",        "configurePreset": "aw-ninja-gcc",                                      "generators": ["TGZ"] },
+    { "name": "aw-ninjamulti-gcc",   "configurePreset": "aw-ninjamulti-gcc",   "configurations":["Release"], "generators": ["TGZ"] },
+    { "name": "aw-ninja-clang",      "configurePreset": "aw-ninja-clang",                                    "generators": ["TGZ"] },
+    { "name": "aw-ninjamulti-clang", "configurePreset": "aw-ninjamulti-clang", "configurations":["Release"], "generators": ["TGZ"] }
   ],
   "workflowPresets": [
     {
@@ -102,7 +108,8 @@
       "steps": [
         { "type": "configure", "name": "aw-ninja-gcc" },
         { "type": "build",     "name": "aw-ninja-gcc" },
-        { "type": "test",      "name": "aw-ninja-gcc" }
+        { "type": "test",      "name": "aw-ninja-gcc" },
+        { "type": "package",   "name": "aw-ninja-gcc" }
       ]
     },
     {
@@ -110,7 +117,8 @@
       "steps": [
         { "type": "configure", "name": "aw-ninjamulti-gcc" },
         { "type": "build",     "name": "aw-ninjamulti-gcc" },
-        { "type": "test",      "name": "aw-ninjamulti-gcc" }
+        { "type": "test",      "name": "aw-ninjamulti-gcc" },
+        { "type": "package",   "name": "aw-ninjamulti-gcc" }
       ]
     },
     {
@@ -118,7 +126,8 @@
       "steps": [
         { "type": "configure", "name": "aw-ninja-clang" },
         { "type": "build",     "name": "aw-ninja-clang" },
-        { "type": "test",      "name": "aw-ninja-clang" }
+        { "type": "test",      "name": "aw-ninja-clang" },
+        { "type": "package",   "name": "aw-ninja-clang" }
       ]
     },
     {
@@ -126,7 +135,8 @@
       "steps": [
         { "type": "configure", "name": "aw-ninjamulti-clang" },
         { "type": "build",     "name": "aw-ninjamulti-clang" },
-        { "type": "test",      "name": "aw-ninjamulti-clang" }
+        { "type": "test",      "name": "aw-ninjamulti-clang" },
+        { "type": "package",   "name": "aw-ninjamulti-clang" }
       ]
     }
   ]
