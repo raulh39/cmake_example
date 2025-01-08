@@ -14,8 +14,7 @@ target_sources(awesome PRIVATE awesome.cpp)
 #   such paths should be handled by the BASE_DIRS
 target_sources(awesome
     PUBLIC
-        FILE_SET api
-        TYPE HEADERS
+        FILE_SET HEADERS
         BASE_DIRS .
         FILES
             awesome.h
@@ -28,7 +27,7 @@ include(GenerateExportHeader)
 generate_export_header(awesome)
 target_sources(awesome
     PUBLIC
-        FILE_SET api
+        FILE_SET HEADERS
         BASE_DIRS ${CMAKE_CURRENT_BINARY_DIR}
         FILES ${CMAKE_CURRENT_BINARY_DIR}/awesome_export.h
 )

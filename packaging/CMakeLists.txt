@@ -1,5 +1,5 @@
 install(TARGETS hello_world awesome)
-install(TARGETS awesome FILE_SET api)
+install(TARGETS awesome FILE_SET HEADERS)
 
 
 set(CPACK_PACKAGE_NAME CMakeExamples)
