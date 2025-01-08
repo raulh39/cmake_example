@@ -1,7 +1,9 @@
 #include <iostream>
+#include "awesome.h"
 
 int main(int argc, char const *argv[])
 {
-    std::cout << "awesome unit tests\n";
+    auto added = add(40,2);
+    std::cout << "awesome unit tests " << added << '\n';
     return 0;
 }
