@@ -21,12 +21,14 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # Recommended way to set C++ standard to use (see "cmake/set_cpp_version.cmake")
 include(set_cpp_version)
-# Recommended practices: hide all symbols in shared libs by default (see "cmake/visibility.cmake")
+# Recommended practice: hide all symbols in shared libs by default (see "cmake/visibility.cmake")
 include(visibility)
+# Recommended practice: set installation dirs and handle RPATH (see "cmake/install_options.cmake")
+include(install_options)
 
 # General recommended practice:
 # Avoid hard-coding turning warnings into errors. Instead, the user can use
-#     -DCMAKE_COMPILE_WARNING_AS_ERROR=YES (probably in a preset)
+#     -DCMAKE_COMPILE_WARNING_AS_ERROR=YES (see "CMakePresets.json")
 
 
 add_subdirectory(src)
