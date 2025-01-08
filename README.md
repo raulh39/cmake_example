@@ -169,3 +169,4 @@ cmake --install build_clang_ninja_multi --config Release --prefix installation_c
 * 14.3. Print Helpers
 * 14.4. Tracing Variable Access
 * 14.5. Debugging Generator Expressions
+* Use Conan and then 35.4. Installing Imported Targets
