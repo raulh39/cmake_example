@@ -151,9 +151,8 @@ cmake --install build_clang_ninja_multi --config Release --prefix installation_c
 
 
 # TODO
-* CPack, and add it to preset workflow
 * Read Chapter 35, Installing, to move "install()" commands away from packaging/CMakeLists.txt
-* option() to disable subtrees 
+* Create several libs and use option() to disable subtrees. Use a common prefix
 * Recommended practices:
     * Do NOT if/switch on CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.
     * Prefer to provide cache variables for controlling whether to enable optional parts of
@@ -170,3 +169,4 @@ cmake --install build_clang_ninja_multi --config Release --prefix installation_c
 * 14.4. Tracing Variable Access
 * 14.5. Debugging Generator Expressions
 * Use Conan and then 35.4. Installing Imported Targets
+* Windows. MingGW. MSVC.
