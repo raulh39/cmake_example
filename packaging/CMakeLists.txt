@@ -1,7 +1,3 @@
-install(TARGETS hello_world awesome)
-install(TARGETS awesome FILE_SET HEADERS)
-
-
 set(CPACK_PACKAGE_NAME CMakeExamples)
 set(CPACK_PACKAGE_VENDOR BroCompany)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "An awesome exampe of awesomeness")

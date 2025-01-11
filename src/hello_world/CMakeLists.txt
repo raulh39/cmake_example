@@ -9,3 +9,5 @@ target_sources(hello_world PRIVATE hello_world.cpp)
 # Recommended practice:
 # Always specify PRIVATE, PUBLIC, or INTERFACE keywords
 target_link_libraries(hello_world PRIVATE awesome::awesome)
+
+install(TARGETS hello_world awesome)
