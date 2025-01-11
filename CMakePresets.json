@@ -37,8 +37,8 @@
     },
     {
       "name": "aw-ninja-gcc",
-      "displayName": "Ninja + System's gcc",
-      "description": "Ninja + System's gcc",
+      "displayName": "Ninja + gcc",
+      "description": "Ninja + gcc",
       "inherits": [
         "aw-base",
         "aw-gcc-base"
@@ -54,8 +54,8 @@
     },
     {
       "name": "aw-ninjamulti-gcc",
-      "displayName": "Ninja Multi-config + System's gcc",
-      "description": "Ninja Multi-config + System's gcc",
+      "displayName": "Ninja Multi-config + gcc",
+      "description": "Ninja Multi-config + gcc",
       "inherits": [
         "aw-base",
         "aw-gcc-base"
