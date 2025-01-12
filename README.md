@@ -28,12 +28,8 @@ And using:
 
 I also want to include the instructions here on how to use all of this
 
-# Instructions
 
-These instructions assume we are in the parent directory of the repository and
-that the name of the directory for the repository is "cmake_examples".
-
-## Conan
+## Note for Conan provider
 
 The file conan_provider.cmake is provided for ease of use. It has been downloaded using:
 ```
@@ -41,23 +37,11 @@ wget 'https://raw.githubusercontent.com/conan-io/cmake-conan/refs/heads/develop2
 ```
 and it is recommended to update it to latest version
 
-Following commands assume Conan has been configured with two profiles: clang18 and gcc14.
 
-Contents of `$(conan config home)/profiles/clang18`:
-```
-[settings]
-arch=x86_64
-build_type=Release
-compiler=clang
-compiler.cppstd=20
-compiler.libcxx=libstdc++11
-compiler.version=18
-os=Linux
+# Instructions
 
-[conf]
-tools.cmake.cmaketoolchain:generator=Ninja
-tools.build:compiler_executables={"c": "clang-18", "cpp": "clang++-18"}
-```
+These instructions assume we are in the parent directory of the repository and
+that the name of the directory for the repository is "cmake_examples".
 
 ## Ninja + clang
 
