@@ -33,62 +33,30 @@ I also want to include the instructions here on how to use all of this
 These instructions assume we are in the parent directory of the repository and
 that the name of the directory for the repository is "cmake_examples".
 
-## Ninja + gcc
+## Conan
 
-### Using presets
+The file conan_provider.cmake is provided for ease of use. It has been downloaded using:
 ```
-env -C cmake_examples cmake --workflow --preset aw-ninja-gcc --fresh
+wget 'https://raw.githubusercontent.com/conan-io/cmake-conan/refs/heads/develop2/conan_provider.cmake'
 ```
+and it is recommended to update it to latest version
 
-### Not using presets
+Following commands assume Conan has been configured with two profiles: clang18 and gcc14.
+
+Contents of `$(conan config home)/profiles/clang18`:
 ```
-cmake \
--DCMAKE_BUILD_TYPE:STRING=Release \
--DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
--DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
--S cmake_examples \
--B build_gcc_ninja \
--G Ninja
+[settings]
+arch=x86_64
+build_type=Release
+compiler=clang
+compiler.cppstd=20
+compiler.libcxx=libstdc++11
+compiler.version=18
+os=Linux
 
-cmake --build build_gcc_ninja
-
-ctest --test-dir build_gcc_ninja
-
-env -C build_gcc_ninja cpack -G TGZ
-```
-
-### Install
-```
-rm -rf installation_gcc_ninja &&
-cmake --install build_gcc_ninja --prefix installation_gcc_ninja
-```
-
-### Ninja multiconfig + gcc
-### Using presets
-```
-env -C cmake_examples cmake --workflow --preset aw-ninjamulti-gcc --fresh
-```
-
-### Not using presets
-```
-cmake \
--DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
--DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
--S cmake_examples \
--B build_gcc_ninja_multi \
--G "Ninja Multi-Config"
-
-cmake --build build_gcc_ninja_multi --config Release
-
-ctest --test-dir build_gcc_ninja_multi -C Release
-
-env -C build_gcc_ninja_multi cpack -G TGZ -C Release
-```
-
-### Install
-```
-rm -rf installation_gcc_ninja_multi &&
-cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc_ninja_multi
+[conf]
+tools.cmake.cmaketoolchain:generator=Ninja
+tools.build:compiler_executables={"c": "clang-18", "cpp": "clang++-18"}
 ```
 
 ## Ninja + clang
@@ -150,8 +118,66 @@ cmake --install build_clang_ninja_multi --config Release --prefix installation_c
 ```
 
 
+## Ninja + gcc
+
+### Using presets
+```
+env -C cmake_examples cmake --workflow --preset aw-ninja-gcc --fresh
+```
+
+### Not using presets
+```
+cmake \
+-DCMAKE_BUILD_TYPE:STRING=Release \
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-S cmake_examples \
+-B build_gcc_ninja \
+-G Ninja
+
+cmake --build build_gcc_ninja
+
+ctest --test-dir build_gcc_ninja
+
+env -C build_gcc_ninja cpack -G TGZ
+```
+
+### Install
+```
+rm -rf installation_gcc_ninja &&
+cmake --install build_gcc_ninja --prefix installation_gcc_ninja
+```
+
+### Ninja multiconfig + gcc
+### Using presets
+```
+env -C cmake_examples cmake --workflow --preset aw-ninjamulti-gcc --fresh
+```
+
+### Not using presets
+```
+cmake \
+-DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-S cmake_examples \
+-B build_gcc_ninja_multi \
+-G "Ninja Multi-Config"
+
+cmake --build build_gcc_ninja_multi --config Release
+
+ctest --test-dir build_gcc_ninja_multi -C Release
+
+env -C build_gcc_ninja_multi cpack -G TGZ -C Release
+```
+
+### Install
+```
+rm -rf installation_gcc_ninja_multi &&
+cmake --install build_gcc_ninja_multi --config Release --prefix installation_gcc_ninja_multi
+```
+
+
 # TODO
-* Read Chapter 35, Installing, to move "install()" commands away from packaging/CMakeLists.txt
 * Create several libs and use option() to disable subtrees. Use a common prefix
 * Recommended practices:
     * Do NOT if/switch on CMAKE_BUILD_TYPE to add flags as it is only meaningful in single configuration generators.

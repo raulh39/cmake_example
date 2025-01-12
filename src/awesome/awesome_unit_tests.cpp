@@ -1,9 +1,11 @@
-#include <iostream>
 #include "awesome.h"
+#include "gmock/gmock.h"
+#include <gmock/gmock.h>
 
-int main(int argc, char const *argv[])
+using namespace testing;
+
+TEST(AwesomeLibUnitTest, CanAdd)
 {
     auto added = add(40,2);
-    std::cout << "awesome unit tests " << added << '\n';
-    return 0;
+    ASSERT_THAT(added, Eq(42));
 }

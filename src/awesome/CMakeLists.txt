@@ -36,8 +36,9 @@ target_sources(awesome
 # Use aliases for libraries
 add_library(awesome::awesome ALIAS awesome)
 
+find_package(GTest REQUIRED)
 add_executable(awesome_unit_tests awesome_unit_tests.cpp)
-target_link_libraries(awesome_unit_tests PUBLIC awesome::awesome)
+target_link_libraries(awesome_unit_tests PUBLIC awesome::awesome GTest::gmock_main)
 add_test(NAME AwesomeUnitTests COMMAND awesome_unit_tests)
 
 install(TARGETS awesome)
