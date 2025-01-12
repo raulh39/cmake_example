@@ -71,7 +71,10 @@ env -C cmake_examples cmake --workflow --preset aw-ninja-clang --fresh
 cmake \
 -DCMAKE_BUILD_TYPE:STRING=Release \
 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
--DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++ \
+-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake" \
+-DCONAN_HOST_PROFILE="default;auto-cmake" \
+-DCONAN_BUILD_PROFILE="default;auto-cmake" \
 -S cmake_examples \
 -B build_clang_ninja \
 -G Ninja
@@ -99,7 +102,10 @@ env -C cmake_examples cmake --workflow --preset aw-ninjamulti-clang --fresh
 ```
 cmake \
 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
--DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++ \
+-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake" \
+-DCONAN_HOST_PROFILE="default;auto-cmake" \
+-DCONAN_BUILD_PROFILE="default;auto-cmake" \
 -S cmake_examples \
 -B build_clang_ninja_multi \
 -G "Ninja Multi-Config"
@@ -131,6 +137,9 @@ cmake \
 -DCMAKE_BUILD_TYPE:STRING=Release \
 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
 -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake" \
+-DCONAN_HOST_PROFILE="default;auto-cmake" \
+-DCONAN_BUILD_PROFILE="default;auto-cmake" \
 -S cmake_examples \
 -B build_gcc_ninja \
 -G Ninja
@@ -159,6 +168,9 @@ env -C cmake_examples cmake --workflow --preset aw-ninjamulti-gcc --fresh
 cmake \
 -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE \
 -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/g++ \
+-DCMAKE_PROJECT_TOP_LEVEL_INCLUDES="conan_provider.cmake" \
+-DCONAN_HOST_PROFILE="default;auto-cmake" \
+-DCONAN_BUILD_PROFILE="default;auto-cmake" \
 -S cmake_examples \
 -B build_gcc_ninja_multi \
 -G "Ninja Multi-Config"
