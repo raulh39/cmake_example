@@ -1,6 +1,6 @@
 # What
 
-In this repo, I will be providing examples of how I believe modern CMake should be used.
+In this repo, I will provide an example of how I believe modern CMake should be used.
 
 Most of the information is drawn from the book "Professional CMake: A Practical Guide," in its 19th edition, which is geared towards CMake 3.30.
 
